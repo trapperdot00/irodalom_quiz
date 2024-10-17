@@ -1,0 +1,4 @@
+kolto = "Vörösmarty Mihály"
+cim = "Szózat"
+datum = "1836"
+mufaj = "óda"

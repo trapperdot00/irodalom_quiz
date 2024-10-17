@@ -1,0 +1,4 @@
+kolto = "Anakreón"
+cim = "Gyűlölöm"
+datum = "i.e. 600"
+mufaj = "epigramma"

@@ -1,0 +1,4 @@
+kolto = "Balassi Bálint"
+cim = "Egy katonaének"
+datum = "1589"
+mufaj = "dal"

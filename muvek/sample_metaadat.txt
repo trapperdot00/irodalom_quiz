@@ -1,3 +1,4 @@
+# kommentek: # jellel előjelezve
 # Szintaktika a metaadat.txt fájlhoz:
 # (Az idézőjelek kötelezőek)
 

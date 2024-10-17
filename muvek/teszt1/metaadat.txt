@@ -1,5 +1,0 @@
-
-kolto = "Janus Pannonius"
-  cim = "Pannónia dicsérete"
-datum = "1464-1465"
-	mufaj = "epigramma"

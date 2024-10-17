@@ -1,0 +1,4 @@
+kolto = "Caius Valerius Catullus"
+cim = "Gyűlölök és szeretek..."
+datum = "i.e. 100"
+mufaj = "epigramma"

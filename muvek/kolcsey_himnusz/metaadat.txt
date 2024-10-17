@@ -1,0 +1,4 @@
+kolto = "Kölcsey Ferenc"
+cim = "Himnusz"
+datum = "1823"
+mufaj = "Himnusz"
