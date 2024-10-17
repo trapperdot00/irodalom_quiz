@@ -1,0 +1,7 @@
+# Szintaktika a metaadat.txt fájlhoz:
+# (Az idézőjelek kötelezőek)
+
+kolto = "költő neve"
+cim = "mű címe"
+datum = "1422"
+mufaj = "valami cucc jöhet ide"

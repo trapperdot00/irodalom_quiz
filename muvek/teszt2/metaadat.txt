@@ -1,0 +1,4 @@
+kolto = "Csokonai Vitéz Mihály"
+cim = "A reményhez"
+datum = "1803"
+mufaj = "elégia"
