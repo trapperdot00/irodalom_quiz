@@ -1,0 +1,6 @@
+  mufaj= "ote"
+
+kolto="csaba"
+ datum="ga"
+	cim ="yepp"
+

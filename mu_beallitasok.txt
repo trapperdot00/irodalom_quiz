@@ -1,0 +1,4 @@
+kolto
+cim
+datum
+mufaj

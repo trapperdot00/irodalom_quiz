@@ -1,15 +1,31 @@
 #include "Quiz.h"
 
-std::string lowercase(std::string s) {
-	for (std::string::iterator it = s.begin(); it != s.end(); ++it)
-		*it = std::tolower(*it);
-	return s;
+std::string Quiz::options_filename = "../beallitasok.txt";
+
+void Quiz::init_options() {
+	std::ifstream infile(options_filename);
+	std::string line;
+	if (std::getline(infile, line)) {
+		printed_lines = std::stoull(q_utils::get_argument_num(line));
+	} else {
+		printed_lines = 4;
+	}
 }
 
 void Quiz::operator()() {
 	const Entry &e = entries[vec_rand()];
 	
-	std::size_t printed_lines = 4;
+	for (std::set<std::string>::const_iterator it = Metadata::options.cbegin();
+			it != Metadata::options.cend(); ++it) {
+		std::cout << *it << ":\t" << e.at(*it) << std::endl;
+	}
+	
+}
+
+/*
+void Quiz::operator()() {
+	const Entry &e = entries[vec_rand()];
+	
 	std::size_t top_range = (e.line_count() > printed_lines) ? (e.line_count() - printed_lines) : 0;
 	if (top_range)
 		entry_rand.set_range(0, top_range);
@@ -33,30 +49,31 @@ void Quiz::operator()() {
 	
 	std::cout << "\nKi írta ezt a művet?\t";
 	std::getline(std::cin, guess);
-	if (lowercase(guess) == lowercase(e.get_author()))
+	if (q_utils::lowercase(guess) == q_utils::lowercase(e.get_author()))
 		std::cout << "Helyes!" << std::endl;
 	else
 		std::cout << "Hibás válasz, a helyes: " << e.get_author() << std::endl;
 
 	std::cout << "\nMi a mű címe?\t";
 	std::getline(std::cin, guess);
-	if (lowercase(guess) == lowercase(e.get_title()))
+	if (q_utils::lowercase(guess) == q_utils::lowercase(e.get_title()))
 		std::cout << "Helyes!" << std::endl;
 	else
 		std::cout << "Hibás válasz, a helyes: " << e.get_title() << std::endl;
 
 	std::cout << "\nMikor jelent meg a mű?\t";
 	std::getline(std::cin, guess);
-	if (lowercase(guess) == lowercase(e.get_date()))
+	if (q_utils::lowercase(guess) == q_utils::lowercase(e.get_date()))
 		std::cout << "Helyes!" << std::endl;
 	else
 		std::cout << "Hibás válasz, a helyes: " << e.get_date() << std::endl;
 
 	std::cout << "\nMi a műfaja?\t";
 	std::getline(std::cin, guess);
-	if (lowercase(guess) == lowercase(e.get_genre()))
+	if (q_utils::lowercase(guess) == q_utils::lowercase(e.get_genre()))
 		std::cout << "Helyes!" << std::endl;
 	else
 		std::cout << "Hibás válasz, a helyes: " << e.get_genre() << std::endl;
 	std::cout << std::setw(60) << std::setfill('-') << "-\n";
 }
+*/

@@ -7,22 +7,34 @@
 #include <stdexcept>
 #include <iostream>
 
+#include "utils/utilities.h"
+
+template <typename T>
 class Random {
 public:
-	Random() = default;
-	Random(std::size_t min, std::size_t max) { set_range(min, max); }
+	Random();
+	Random(const T &, const T &);
 
-	unsigned operator()() { return dist(engine); }
-	void set_range(std::size_t min, std::size_t max) {
-		if (min >= max) throw std::invalid_argument("invalid range");
-		dist = std::uniform_int_distribution<unsigned>(min, max);
-	}
-	void seed(std::size_t s) {
-		engine.seed(s);
-	}
+	T operator()() { return dist(engine); }
+	void set_range(const T &, const T &);
+	void seed(std::size_t s) { engine.seed(s); }
 private:
 	std::default_random_engine engine;
-	std::uniform_int_distribution<unsigned> dist;
+	std::uniform_int_distribution<T> dist;
 };
+
+template <typename T>
+Random<T>::Random()
+	: engine(q_utils::time()) {}
+
+template <typename T>
+Random<T>::Random(const T &a, const T &b)
+	: engine(q_utils::time()), dist(a, b) {}
+
+template <typename T>
+void Random<T>::set_range(const T &min, const T &max) {
+	if (max < min) throw std::invalid_argument("invalid range");
+	dist = std::uniform_int_distribution<T>(min, max);
+}
 
 #endif

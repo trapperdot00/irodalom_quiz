@@ -1,28 +1,28 @@
 #ifndef METADATA_H
 #define METADATA_H
 
-#include <iostream>
-#include <vector>
 #include <string>
-#include <cctype>
-#include <algorithm>
+#include <vector>
+#include <set>
+#include <map>
+
+#include "utils/utilities.h"
 
 class Metadata {
 	friend std::ostream &operator<<(std::ostream &, const Metadata &);
 public:
-	Metadata(const std::string &, const std::string &,
-			 const std::string &, const std::string &);
+	Metadata(const std::map<std::string, std::string> &m)
+		: data(m) {}
+	const std::map<std::string, std::string> &get_data() const { return data; }
 
-	std::string get_author() const { return author; }
-	std::string get_title() const { return title; }
-	std::string get_date() const { return date; }
-	std::string get_genre() const { return genre; }
 private:
-	std::string author, title, date, genre;
+	std::map<std::string, std::string> data;
+
+public:
+	static std::string options_filename;
+	static std::set<std::string> options;
 };
 
 Metadata make_metadata(const std::vector<std::string> &);
-
-std::ostream &operator<<(std::ostream &, const Metadata &);
 
 #endif

@@ -2,10 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <stdexcept>
 #include <fstream>
 
-#include "Entry.h"
 #include "Quiz.h"
 
 namespace fs = std::filesystem;
@@ -31,10 +29,16 @@ std::vector<Entry> init_entries(const fs::path &path) {
 }
 
 int main() {
+	//std::for_each(Metadata::options.cbegin(), Metadata::options.cend(), [](const std::string &s) { std::cout << s << std::endl; });
+	//init_entries(fs::path("../muvek"));
+	
 	const fs::path rootpath = "../muvek";
 	Quiz q(init_entries(rootpath));
+	int i;
 	while (std::cin) {
 		q();
+		std::cin >> i;
 	}
+	
 	return 0;
 }
