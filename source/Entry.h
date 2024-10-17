@@ -17,8 +17,8 @@ public:
 	std::size_t line_count() const { return q_utils::line_count(text); }
 		
 	std::string get_text() const { return text; }
-	std::string at(const std::string &s) const { return m_data.get_data().at(s); }
-	
+	const Metadata &get_metadata() const { return m_data; }
+
 private:
 	const std::string text;
 	const Metadata m_data;

@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <cctype>
 
 namespace q_utils {
 
@@ -23,12 +24,16 @@ std::map<T1, T2> map_from_set(const std::set<T1> &);
 template <>
 std::map<std::string, std::string::size_type> map_from_set(const std::set<std::string> &);
 
+std::string remove_comment(std::string);
+
 std::string get_option_f(const std::string &);
 std::string get_argument_str(const std::string &);
 std::string get_argument_num(const std::string &);
 
 std::size_t line_count(const std::string &);
 std::string lowercase(std::string);
+
+bool is_numeric(const std::string &);
 
 }
 

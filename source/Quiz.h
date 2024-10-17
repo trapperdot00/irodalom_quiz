@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iomanip>
 #include <fstream>
+#include <stdexcept>
 
 #include "utils/utilities.h"
 #include "Entry.h"
@@ -23,9 +24,10 @@ public:
 	void operator()();
 private:
 	void init_options();
+	void print_selection(const std::string &, std::size_t, std::size_t);
 
 	std::vector<Entry> entries;
-	std::size_t printed_lines;
+	std::size_t printed_lines = 4;
 
 	Random<std::size_t> vec_rand;
 	Random<std::size_t> entry_rand;

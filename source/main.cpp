@@ -29,7 +29,7 @@ std::vector<Entry> init_entries(const fs::path &path) {
 }
 
 int main() {
-	//std::for_each(Metadata::options.cbegin(), Metadata::options.cend(), [](const std::string &s) { std::cout << s << std::endl; });
+	std::for_each(Metadata::options.cbegin(), Metadata::options.cend(), [](const std::string &s) { std::cout << s << std::endl; });
 	//init_entries(fs::path("../muvek"));
 	
 	const fs::path rootpath = "../muvek";

@@ -1,4 +1,7 @@
-kolto
-cim
-datum
-mufaj
+# Itt definiálhatóak minden műre a metaadatok elemei,
+# és a rá vonatkozó kérdések
+
+kolto = "Ki írta ezt a művet?"
+cim = "Mi a mű címe?"
+datum = "Mikor jelent meg a mű?"
+mufaj = "Mi a műfaja a műnek?"

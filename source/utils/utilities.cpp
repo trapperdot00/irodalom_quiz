@@ -7,6 +7,8 @@ std::set<std::string> get_options(const std::string &filename) {
 	std::ifstream infile(filename);
 	std::string line;
 	while (std::getline(infile, line)) {
+		line = remove_comment(line);
+		if (line.empty()) continue;
 		std::string option;
 		std::istringstream stream(line);
 		stream >> option;
@@ -26,6 +28,14 @@ std::map<std::string, std::string::size_type> map_from_set(const std::set<std::s
 		ret.insert(std::make_pair(key, std::string::npos));
 	}
 	return ret;
+}
+
+std::string remove_comment(std::string s) {
+	static constexpr char comment_tag = '#';
+	std::string::size_type comment_pos = s.find(comment_tag);
+	if (comment_pos != std::string::npos)
+		s.erase(s.find(comment_tag));
+	return s;
 }
 
 std::string get_option_f(const std::string &line) {
@@ -67,6 +77,11 @@ std::string lowercase(std::string s) {
 	std::transform(s.begin(), s.end(), s.begin(), 
 			[](unsigned char c) { return std::tolower(c); } );
 	return s;
+}
+
+bool is_numeric(const std::string &s) {
+	return !s.empty() && std::find_if(s.cbegin(), s.cend(), 
+			[](unsigned char c) { return !std::isdigit(c);}) == s.cend();
 }
 
 }	// end q_utils namespace 
