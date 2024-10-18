@@ -35,10 +35,19 @@ void Quiz::print_selection(const std::string &s, std::size_t start, std::size_t 
 	}
 }
 
-/* TODO
-void Quiz::question(const Metadata &m) {
-
-} */
+void Quiz::question(const Metadata &m) const {
+	const std::map<std::string, std::string> &metamap = m.get_data();
+	std::string guess;
+	for (std::map<std::string, std::string>::const_iterator it = metamap.cbegin();
+			it != metamap.cend(); ++it) {
+		std::cout << it->first << ": ";
+		std::getline(std::cin, guess);
+		if (guess == it->second)
+			std::cout << "Helyes" << std::endl;
+		else
+			std::cout << "Hibás" << std::endl;
+	}
+}
 
 void Quiz::operator()() {
 
@@ -59,5 +68,5 @@ void Quiz::operator()() {
 	std::size_t end = beg + printed_lines;
 
 	print_selection(text, beg, end);
-	// TODO: question(e.get_metadata());
+	question(e.get_metadata());
 }

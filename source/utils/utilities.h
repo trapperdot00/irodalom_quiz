@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <algorithm>
 #include <string>
+#include <vector>
 #include <set>
 #include <map>
 #include <utility>
@@ -12,8 +13,13 @@
 #include <sstream>
 #include <iostream>
 #include <cctype>
+#include <stdexcept>
 
 namespace q_utils {
+
+std::string read_lines(std::istream &);
+std::string get_nth_line(const std::string &, std::size_t);
+std::vector<std::string> split_lines(const std::string &);
 
 auto time() -> 
 	decltype(std::chrono::steady_clock::now().time_since_epoch().count());

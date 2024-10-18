@@ -9,13 +9,15 @@
 #include "utils/utilities.h"
 
 class Metadata {
-	friend std::ostream &operator<<(std::ostream &, const Metadata &);
 public:
 	Metadata(const std::map<std::string, std::string> &m)
 		: data(m) {}
 	const std::map<std::string, std::string> &get_data() const { return data; }
 
 private:
+	// Key is the option, value is the pair whose first member is the value,
+	// second is the question
+	//std::map<const std::string *, std::pair<std::string, std::string>> data;
 	std::map<std::string, std::string> data;
 
 public:
@@ -23,6 +25,6 @@ public:
 	static std::set<std::string> options;
 };
 
-Metadata make_metadata(const std::vector<std::string> &);
+Metadata make_metadata(const std::string &);
 
 #endif

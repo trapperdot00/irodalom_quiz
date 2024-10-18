@@ -25,6 +25,7 @@ public:
 private:
 	void init_options();
 	void print_selection(const std::string &, std::size_t, std::size_t);
+	void question(const Metadata &) const;
 
 	std::vector<Entry> entries;
 	std::size_t printed_lines = 4;

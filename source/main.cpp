@@ -9,14 +9,11 @@
 namespace fs = std::filesystem;
 
 Entry construct_entry(const fs::path &path) {
-	std::ifstream text(path/"szöveg.txt");
-	std::ifstream metadata(path/"metaadat.txt");
-	std::string lines;
-	std::vector<std::string> metadata_lines;
-	for (std::string line; std::getline(text, line); lines += line + '\n') ;
-	lines.erase(lines.size() - 1);
-	for (std::string line; std::getline(metadata, line); metadata_lines.push_back(line)) ;
-	return Entry(lines, make_metadata(metadata_lines));
+	std::ifstream text_f(path/"szöveg.txt");
+	std::ifstream metadata_f(path/"metaadat.txt");
+	std::string text = q_utils::read_lines(text_f);
+	std::string data = q_utils::read_lines(metadata_f);
+	return Entry(text, make_metadata(data));
 }
 
 std::vector<Entry> init_entries(const fs::path &path) {
@@ -29,15 +26,13 @@ std::vector<Entry> init_entries(const fs::path &path) {
 }
 
 int main() {
-	std::for_each(Metadata::options.cbegin(), Metadata::options.cend(), [](const std::string &s) { std::cout << s << std::endl; });
-	//init_entries(fs::path("../muvek"));
+	//std::for_each(Metadata::options.cbegin(), Metadata::options.cend(),
+	//		[](const std::string &s) { std::cout << s << std::endl; });
 	
 	const fs::path rootpath = "../muvek";
 	Quiz q(init_entries(rootpath));
-	int i;
 	while (std::cin) {
 		q();
-		std::cin >> i;
 	}
 	
 	return 0;

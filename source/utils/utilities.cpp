@@ -2,6 +2,46 @@
 
 namespace q_utils {
 
+std::string read_lines(std::istream &is) {
+	std::string ret, line;
+	bool first_line = true;
+	while (std::getline(is, line)) {
+		if (first_line)
+			first_line = false;
+		else
+			ret += '\n';
+		ret += line;
+	}
+	return ret;
+}
+
+std::string get_nth_line(const std::string &s, std::size_t n) {
+	std::size_t index = 0;
+	std::size_t line_cnt = 0;
+	while (index != s.size()  && line_cnt != n) {
+		if (s[index] == '\n')
+			++line_cnt;
+		++index;
+	}
+	if (line_cnt != n)
+		throw std::out_of_range("line number not in range");
+	std::string ret = s.substr(index);
+	std::string::size_type newline_pos = ret.find('\n');
+	if (newline_pos != std::string::npos)
+		ret.erase(newline_pos);
+	return ret;
+}
+
+std::vector<std::string> split_lines(const std::string &s) {
+	std::vector<std::string> ret;
+	std::string line;
+	std::istringstream stream(s);
+	while (std::getline(stream, line)) {
+		ret.push_back(line);
+	}
+	return ret;
+}
+	
 std::set<std::string> get_options(const std::string &filename) {
 	std::set<std::string> ret;
 	std::ifstream infile(filename);
