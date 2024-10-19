@@ -57,10 +57,37 @@ void Quiz::question(const Metadata &m) const {
 	print_delimiter(std::cout, 64, '-') << std::endl;
 }
 
+void Quiz::fill_indexes() {
+	for (std::size_t i = 0; i != entries.size(); ++i) {
+		rand_pool.push_back(i);
+	}
+}
+
+void Quiz::rm_index(std::size_t i) {
+	std::vector<std::size_t>::iterator it = std::find(rand_pool.begin(), rand_pool.end(), i);
+	if (it != rand_pool.end())
+		rand_pool.erase(it);
+}
+
+std::size_t Quiz::generate_valid() {
+	std::size_t ret;
+	if (rand_pool.empty())
+		fill_indexes();
+	std::cout << "rand_pool: ";
+	std::for_each(rand_pool.cbegin(), rand_pool.cend(), [](std::size_t i){ std::cout << ' ' << i; });
+	std::cout << std::endl;
+	do {
+		ret = vec_rand();
+		std::cout << "rand_num: " << ret << std::endl;
+	} while (std::find(rand_pool.cbegin(), rand_pool.cend(), ret) == rand_pool.cend());
+	rm_index(ret);
+	return ret;
+}
+
 void Quiz::operator()() {
 
 	// Select a random entry
-	const Entry &e = entries[vec_rand()];
+	const Entry &e = entries[generate_valid()];
 
 	std::string text = e.get_text();
 	std::size_t text_line_cnt = q_utils::line_count(text);
