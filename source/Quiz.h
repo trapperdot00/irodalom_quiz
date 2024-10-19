@@ -25,10 +25,12 @@ public:
 private:
 	void init_options();
 	void print_selection(const std::string &, std::size_t, std::size_t);
+	std::ostream &print_delimiter(std::ostream &, std::size_t, char = delim) const;
 	void question(const Metadata &) const;
 
 	std::vector<Entry> entries;
 	std::size_t printed_lines = 4;
+	static char delim;
 
 	Random<std::size_t> vec_rand;
 	Random<std::size_t> entry_rand;

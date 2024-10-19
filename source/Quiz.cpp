@@ -1,6 +1,7 @@
 #include "Quiz.h"
 
 std::string Quiz::options_filename = "../beallitasok.txt";
+char Quiz::delim = '-';
 
 void Quiz::init_options() {
 	std::ifstream infile(options_filename);
@@ -35,18 +36,25 @@ void Quiz::print_selection(const std::string &s, std::size_t start, std::size_t 
 	}
 }
 
+std::ostream &
+Quiz::print_delimiter(std::ostream &os, std::size_t n, char c) const {
+	return os << std::string(n, c);
+}
+
 void Quiz::question(const Metadata &m) const {
-	const std::map<std::string, std::string> &metamap = m.get_data();
+	const Metadata::data_type &metamap = m.get_data();
 	std::string guess;
-	for (std::map<std::string, std::string>::const_iterator it = metamap.cbegin();
-			it != metamap.cend(); ++it) {
-		std::cout << it->first << ": ";
+	for (Metadata::data_type::const_iterator it = metamap.cbegin();
+			it != metamap.cend() && std::cin; ++it) {
+		if (it->second.first.empty()) continue;
+		std::cout << '\n' << *(it->second.second) << '\t';
 		std::getline(std::cin, guess);
-		if (guess == it->second)
-			std::cout << "Helyes" << std::endl;
+		if (guess == it->second.first)
+			std::cout << "Helyes\n";
 		else
-			std::cout << "Hibás" << std::endl;
+			std::cout << "Hibás, helyes válasz: " << it->second.first << '\n';
 	}
+	print_delimiter(std::cout, 64, '-') << std::endl;
 }
 
 void Quiz::operator()() {

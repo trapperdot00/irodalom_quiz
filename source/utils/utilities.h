@@ -25,6 +25,9 @@ auto time() ->
 	decltype(std::chrono::steady_clock::now().time_since_epoch().count());
 std::set<std::string> get_options(const std::string &);
 
+
+template <typename T1, typename T2, typename T3>
+std::map<T1, T3> copy_map_keys(const std::map<T1, T2> &, const T3 &);
 template <typename T1, typename T2>
 std::map<T1, T2> map_from_set(const std::set<T1> &);
 template <>
@@ -45,6 +48,15 @@ bool is_numeric(const std::string &);
 
 // Implementations for template, constexpr and inline functions
 namespace q_utils {
+
+template <typename T1, typename T2, typename T3>
+std::map<T1, T3> copy_map_keys(const std::map<T1, T2> &m, const T3 &val) {
+	std::map<T1, T3> ret;
+	for (const std::pair<T1, T2> &p : m) {
+		ret[p.first] = val;
+	}
+	return ret;
+}
 
 template <typename T1, typename T2>
 std::map<T1, T2> map_from_set(const std::set<T1> &s) {

@@ -5,24 +5,33 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <utility>
 
 #include "utils/utilities.h"
 
 class Metadata {
 public:
-	Metadata(const std::map<std::string, std::string> &m)
+	using data_type = std::map<const std::string *, std::pair<std::string, const std::string *>>;
+	Metadata(const data_type &m)
 		: data(m) {}
-	const std::map<std::string, std::string> &get_data() const { return data; }
+	const data_type &get_data() const { return data; }
+
+	static data_type copy_conf();
 
 private:
-	// Key is the option, value is the pair whose first member is the value,
-	// second is the question
-	//std::map<const std::string *, std::pair<std::string, std::string>> data;
-	std::map<std::string, std::string> data;
+	// Key: option label	-	Mapped: pair: first: value; second: question
+	data_type data;
 
+	static std::pair<std::string, std::string>
+		line_get_opt_val(const std::string &);
+	static std::map<std::string, std::string>
+		global_conf_init();
+	
 public:
 	static std::string options_filename;
-	static std::set<std::string> options;
+
+	// Key: option label	-	Mapped: question
+	static std::map<std::string, std::string> global_conf;
 };
 
 Metadata make_metadata(const std::string &);
