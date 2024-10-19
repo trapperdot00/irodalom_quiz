@@ -1,17 +1,17 @@
 #include "Quiz.h"
 
-std::string Quiz::options_filename = "../beallitasok.txt";
+std::string Quiz::options_filename = "../settings.txt";
 char Quiz::delim = '-';
 
 void Quiz::init_options() {
 	std::ifstream infile(options_filename);
 	if (infile.fail()) {
-		std::cout << "beallitasok.txt not found, using default settings" << std::endl;
+		std::cout << options_filename << " not found, using default settings" << std::endl;
 		return;
 	}
 	std::string line;
 	if (!std::getline(infile, line)) {
-		std::cout << "beallitasok.txt is empty, using default settings" << std::endl;
+		std::cout << options_filename << " is empty, using default settings" << std::endl;
 		return;
 	}
 	std::string no_comments = q_utils::remove_comment(line);
@@ -19,7 +19,7 @@ void Quiz::init_options() {
 	if (!arg.empty() && q_utils::is_numeric(arg))
 		printed_lines = std::stoull(arg);
 	else
-		std::cout << "beallitasok.txt has no viable configuration" << std::endl;
+		std::cout << options_filename << " has no viable configuration" << std::endl;
 }
 
 void Quiz::print_selection(const std::string &s, std::size_t start, std::size_t end) {
@@ -50,9 +50,9 @@ void Quiz::question(const Metadata &m) const {
 		std::cout << '\n' << *(it->second.second) << '\t';
 		std::getline(std::cin, guess);
 		if (guess == it->second.first)
-			std::cout << "Helyes\n";
+			std::cout << "Correct\n";
 		else
-			std::cout << "Hibás, helyes válasz: " << it->second.first << '\n';
+			std::cout << "Wrong, correct answer: " << it->second.first << '\n';
 	}
 	print_delimiter(std::cout, 64, '-') << std::endl;
 }

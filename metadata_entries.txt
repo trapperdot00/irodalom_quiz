@@ -1,0 +1,6 @@
+# New metadata entries can be added here
+
+kolto = "Ki a szerző?"
+cim = "Mi a címe?"
+datum = "Mikor jelent meg?"
+mufaj = "Mi a műfaja?"

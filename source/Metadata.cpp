@@ -1,6 +1,6 @@
 #include "Metadata.h"
 
-std::string Metadata::options_filename = "../metaadat_elemek.txt";
+std::string Metadata::options_filename = "../metadata_entries.txt";
 std::map<std::string, std::string> Metadata::global_conf = global_conf_init();
 
 std::pair<std::string, std::string>

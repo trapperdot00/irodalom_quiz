@@ -9,8 +9,8 @@
 namespace fs = std::filesystem;
 
 Entry construct_entry(const fs::path &path) {
-	std::ifstream text_f(path/"szöveg.txt");
-	std::ifstream metadata_f(path/"metaadat.txt");
+	std::ifstream text_f(path/"text.txt");
+	std::ifstream metadata_f(path/"metadata.txt");
 	std::string text = q_utils::read_lines(text_f);
 	std::string data = q_utils::read_lines(metadata_f);
 	return Entry(text, make_metadata(data));
@@ -25,11 +25,8 @@ std::vector<Entry> init_entries(const fs::path &path) {
 	return entries;
 }
 
-int main() {
-	//std::for_each(Metadata::options.cbegin(), Metadata::options.cend(),
-	//		[](const std::string &s) { std::cout << s << std::endl; });
-	
-	const fs::path rootpath = "../muvek";
+int main() {	
+	const fs::path rootpath = "../writings";
 	Quiz q(init_entries(rootpath));
 	while (std::cin) {
 		q();
